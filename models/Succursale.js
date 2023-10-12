@@ -11,3 +11,4 @@ const Succursale = sequelize.define("Succursale", {
   name: { type: DataTypes.STRING, allowNull: false },
   image: { type: DataTypes.STRING },
 });
+export default Succursale
