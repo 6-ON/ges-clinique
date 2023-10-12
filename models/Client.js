@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/";
 
-const Client = sequelize.define("Succursale", {
+export const Client = sequelize.define("Succursale", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -10,4 +10,3 @@ const Client = sequelize.define("Succursale", {
   },
   
 });
-export default Client
