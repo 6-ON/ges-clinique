@@ -1,0 +1,25 @@
+import {DataTypes} from 'sequelize';
+import sequelize from '../config';
+
+export const Facture=sequelize.define('Facture',{
+
+    id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true
+    },
+    DateEmission:{
+        type:DataTypes.DATE,
+        allowNull: false 
+    },
+    DatePaiement:{
+        type:DataTypes.DATE,
+        allowNull: false
+    },
+    montant:{
+       type:DataTypes.INTEGER,
+       allowNull: false
+    }
+})
+
+
