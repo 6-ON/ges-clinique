@@ -11,3 +11,4 @@ const Technicien = sequelize.define("Technicien", {
   specialite: { type: DataTypes.STRING, allowNull: false },
   disponibilite: { type: DataTypes.BOOLEAN, allowNull: false },
 });
+export default Technicien
