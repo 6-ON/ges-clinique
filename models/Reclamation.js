@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/";
 
-const Reclamation = sequelize.define("Succursale", {
+export const Reclamation = sequelize.define("Succursale", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -11,4 +11,3 @@ const Reclamation = sequelize.define("Succursale", {
   description: { type: DataTypes.STRING, allowNull: false },
   etat: { type: DataTypes.STRING, allowNull: false }
 });
-export default Reclamation
