@@ -15,15 +15,13 @@ module.exports = {
 			},
 		},
 	],
-	
+
 	parserOptions: {
 		ecmaVersion: "latest",
 		sourceType: "module",
 	},
-	globals: {
-		process: true,
-	},
 	rules: {
+		"no-undef": 0,
 		indent: ["error", "tab"],
 		quotes: ["error", "double"],
 		semi: 0,
