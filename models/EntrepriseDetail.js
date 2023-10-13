@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/";
 
-export const Succursale = sequelize.define("Succursale", {
+export const EntrepriseDetail = sequelize.define("EntrepriseDetail", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -9,5 +9,6 @@ export const Succursale = sequelize.define("Succursale", {
     primaryKey: true,
   },
   name: { type: DataTypes.STRING, allowNull: false },
-  image: { type: DataTypes.STRING },
+  adress: { type: DataTypes.STRING, allowNull: false },
+
 });
