@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/";
 
-const Succursale = sequelize.define("Succursale", {
+export const Succursale = sequelize.define("Succursale", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
