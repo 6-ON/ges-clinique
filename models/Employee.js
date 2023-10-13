@@ -4,7 +4,8 @@ import sequelize from "../config";
 export const Employee = sequelize.define("Employee", {
 	id: {
 		type: DataTypes.INTEGER,
-		PrimaryKey: true,
+		primaryKey: true,
+		allowNull: false,
 		autoIncrement: true,
 	},
 });
