@@ -1,13 +1,6 @@
 import express from "express";
-// import {  Route } './routes' // import routes here hada gha exemple
+import router from "./routes";
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use("/", router);
 
-// link routes here
-// app.use('/route', Route) // tahada gha exemple
-// -----------------
-
-app.listen(3000, () => {
-	console.log("Example app listening on port 3000!");
-});
+export default app;
