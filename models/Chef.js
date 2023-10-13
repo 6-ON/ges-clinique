@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import Sequelize from "../config";
-const Chef = Sequelize.define(
+export const Chef = Sequelize.define(
     "Chef",
     {
         id: {

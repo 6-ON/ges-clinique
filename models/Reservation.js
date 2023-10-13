@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import Sequelize from "../config";
-const Reservation = Sequelize.define(
+export const Reservation = Sequelize.define(
     "Reservation",
     {
         id: {
