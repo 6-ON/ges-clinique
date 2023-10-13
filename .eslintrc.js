@@ -15,6 +15,7 @@ module.exports = {
 			},
 		},
 	],
+	
 	parserOptions: {
 		ecmaVersion: "latest",
 		sourceType: "module",
@@ -26,5 +27,6 @@ module.exports = {
 		indent: ["error", "tab"],
 		quotes: ["error", "double"],
 		semi: 0,
+		"no-unused-vars": 0,
 	},
 };
