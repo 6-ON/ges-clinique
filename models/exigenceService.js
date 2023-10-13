@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import Sequelize from "../config";
-export const exigenceService = Sequelize.define(
-    "exigenceService",
+export const ExigenceService = Sequelize.define(
+    "ExigenceService",
     {
         id: {
             type: DataTypes.INTEGER,
