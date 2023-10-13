@@ -8,10 +8,6 @@ export const Facture=sequelize.define('Facture',{
         primaryKey:true,
         autoIncrement:true
     },
-    DateEmission:{
-        type:DataTypes.DATE,
-        allowNull: false 
-    },
     DatePaiement:{
         type:DataTypes.DATE,
         allowNull: false
