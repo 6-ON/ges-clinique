@@ -1,4 +1,4 @@
-import { DataType, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import sequelize from "../config";
    
 
@@ -18,8 +18,8 @@ export const Service= sequelize.define('Service',{
     type:DataTypes.STRING,
     allowNull: false
  },
- tarif:{
-    type:DataType.INTEGER,
+ tarifs:{
+    type:DataTypes.INTEGER,
     allowNull: false
  },
  image:{
