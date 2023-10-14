@@ -10,4 +10,6 @@ export const Reclamation = sequelize.define("Reclamation", {
 	},
 	description: { type: DataTypes.STRING, allowNull: false },
 	etat: { type: DataTypes.STRING, allowNull: false },
+	creatorType: { type: DataTypes.STRING, allowNull: false },
+	creatorId: { type: DataTypes.INTEGER, allowNull: false },
 });
