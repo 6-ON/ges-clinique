@@ -28,4 +28,18 @@ export const User = sequelize.define("User", {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
+	image: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		validate: {
+			isUrl: true,
+		},
+	},
+	userableType: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
+	userableId: {
+		type: DataTypes.INTEGER,
+	},
 });
