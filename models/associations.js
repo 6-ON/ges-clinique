@@ -17,20 +17,30 @@ import {
 Succursale.hasOne(Chef);
 Chef.belongsTo(Succursale);
 //------------------ Chef-User -------------------
-// Chef.hasOne(User);
-User.belongsTo(Chef, {
+Chef.User = Chef.hasOne(User, {
 	foreignKey: "userableId",
 	constraints: false,
 	scope: { userableType: "Chef" },
+	as: "user",
+});
+User.Chef = User.belongsTo(Chef, {
+	foreignKey: "userableId",
+	constraints: false,
+	as: "chef",
 });
 //------------------- Chef-Reclamation ------------------
 
 //------------------- Client-User ------------------
-// Client.hasOne(User);
-User.belongsTo(Client, {
+Client.User = Client.hasOne(User,{
 	foreignKey: "userableId",
 	constraints: false,
 	scope: { userableType: "Client" },
+	as: "user",
+});
+User.Client = User.belongsTo(Client, {
+	foreignKey: "userableId",
+	constraints: false,
+	as: "client",
 });
 
 //------------------- Client-User ------------------
