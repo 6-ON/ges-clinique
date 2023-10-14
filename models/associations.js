@@ -13,8 +13,8 @@ import {
 	Technicien,
 	User,
 } from ".";
-//-------------------- Succursale-Chef --------------------
-Succursale.hasOne(Chef);	
+//-------------------- Chef-Succursale --------------------
+Succursale.hasOne(Chef);
 Chef.belongsTo(Succursale);
 //------------------ Chef-User -------------------
 // Chef.hasOne(User);
@@ -23,6 +23,8 @@ User.belongsTo(Chef, {
 	constraints: false,
 	scope: { userableType: "Chef" },
 });
+//------------------- Chef-Reclamation ------------------
+
 //------------------- Client-User ------------------
 // Client.hasOne(User);
 User.belongsTo(Client, {
@@ -30,3 +32,25 @@ User.belongsTo(Client, {
 	constraints: false,
 	scope: { userableType: "Client" },
 });
+
+//------------------- Client-User ------------------
+
+//------------------- Client-Entreprise ------------------
+
+//------------------- Client-Reservation ------------------
+
+//------------------- Client-Reclamation ------------------
+
+//------------------- Entreprise-EntrepriseDetail ------------------
+
+//------------------- Entreprise-Employee ------------------
+
+//------------------- Service-ExigenceService ------------------
+
+//------------------- Service-Succursale ------------------
+
+//------------------- Service-Reservation ------------------
+
+//------------------- Technicien-Reclamation ------------------
+
+//------------------- Technicien-User ------------------
