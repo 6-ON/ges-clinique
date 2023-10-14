@@ -28,7 +28,6 @@ User.Chef = User.belongsTo(Chef, {
 	constraints: false,
 	as: "chef",
 });
-//------------------- Chef-Reclamation ------------------
 
 //------------------- Client-User ------------------
 Client.User = Client.hasOne(User,{
@@ -43,13 +42,10 @@ User.Client = User.belongsTo(Client, {
 	as: "client",
 });
 
-//------------------- Client-User ------------------
 
 //------------------- Client-Entreprise ------------------
 
 //------------------- Client-Reservation ------------------
-
-//------------------- Client-Reclamation ------------------
 
 //------------------- Entreprise-EntrepriseDetail ------------------
 
@@ -61,6 +57,12 @@ User.Client = User.belongsTo(Client, {
 
 //------------------- Service-Reservation ------------------
 
-//------------------- Technicien-Reclamation ------------------
+//------------------- Reservation-Facture ------------------
+
+//------------------- Reclamation-User ------------------
+
+//------------------- Reclamation-Technicien ------------------
+
+//------------------- Technicien-Reservation ------------------
 
 //------------------- Technicien-User ------------------
