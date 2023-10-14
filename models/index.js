@@ -11,3 +11,4 @@ export * from "./Succursale";
 export * from "./ServiceSuccursale";
 export * from "./Technicien";
 export * from "./User";
+import "./associations";
