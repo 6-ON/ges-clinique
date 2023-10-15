@@ -47,6 +47,8 @@ Client.Reservation = Client.hasMany(Reservation,{as:"reservations"})
 Reservation.Client = Reservation.belongsTo(Client,{as:"client"})
 
 //------------------- Client-EntrepriseDetail ------------------
+Client.EntrepriseDetail = Client.hasOne(EntrepriseDetail,{as:"entrepriseDetail"})
+EntrepriseDetail.Client = EntrepriseDetail.belongsTo(Client)
 
 //------------------- Client-Employee ------------------
 
