@@ -51,7 +51,8 @@ Client.EntrepriseDetail = Client.hasOne(EntrepriseDetail,{as:"entrepriseDetail"}
 EntrepriseDetail.Client = EntrepriseDetail.belongsTo(Client)
 
 //------------------- Client-Employee ------------------
-
+Employee.Client=Employee.belongsTo(Client,{as:"clients",foreignKey:"clientId"})
+Client.Employee=Client.hasMany(Employee,{as:"employees",foreignKey:"clientId"})
 //------------------- Service-ExigenceService ------------------
 Service.ExigenceService = Service.hasMany(ExigenceService,{as:"exigenceService",foreignKey:"serviceId"})
 ExigenceService.Service = ExigenceService.belongsTo(Service,{foreignKey:"serviceId"})
@@ -64,12 +65,14 @@ Service.Succursale = Service.belongsToMany(Succursale,{as:"succursales",through:
 Reservation.Facture=Reservation.hasOne(Facture,{as:"facture"})
 Facture.Reservation=Facture.belongsTo(Reservation,{as:"reservation"})
 //------------------- Reclamation-User ------------------
-
+Reclamation.User=Reclamation.belongsTo(User,{as:"users",foreignKey:"userableId"})
+User.Reclamation=User.hasMany(Reclamation,{as:"reclamations",foreignKey:"userableId"})
 //------------------- Reclamation-Technicien ------------------
 Technicien.Reclamation = Technicien.hasMany(Reclamation,{as:"reclamations",foreignKey:"technicienId"})
 Reclamation.Technicien = Reclamation.belongsTo(Technicien,{as:"technicien"})
 //------------------- Technicien-Reservation ------------------
-
+Technicien.Reservation=Technicien.hasOne(Reservation,{as:"reservations",foreignKey:"techniciensId"})
+Reclamation.Technicien=Reclamation.belongsTo(Technicien,{as:"techniciens",foreignKey:"techniciensId"})
 //------------------- Technicien-Succursale ------------------
 
 //------------------- Technicien-User ------------------
