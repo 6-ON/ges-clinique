@@ -43,7 +43,7 @@ User.Client = User.belongsTo(Client, {
 });
 
 //------------------- Client-Reservation ------------------
-Client.Reservation = Client.hasMany(Reservation,{as:"reservations"})
+Client.Reservation = Client.hasMany(Reservation,{as:"reservations",foreignKey:"clientId"})
 Reservation.Client = Reservation.belongsTo(Client,{as:"client"})
 
 //------------------- Client-EntrepriseDetail ------------------
@@ -51,8 +51,8 @@ Reservation.Client = Reservation.belongsTo(Client,{as:"client"})
 //------------------- Client-Employee ------------------
 
 //------------------- Service-ExigenceService ------------------
-Service.ExigenceService = Service.hasMany(ExigenceService,{as:"exigenceService"})
-ExigenceService.Service = ExigenceService.belongsTo(Service)
+Service.ExigenceService = Service.hasMany(ExigenceService,{as:"exigenceService",foreignKey:"serviceId"})
+ExigenceService.Service = ExigenceService.belongsTo(Service,{foreignKey:"serviceId"})
 //------------------- Service-Succursale ------------------
 Succursale.Service = Succursale.belongsToMany(Service,{as:"services",through:ServiceSuccursale})
 Service.Succursale = Service.belongsToMany(Succursale,{as:"succursales",through:ServiceSuccursale})
@@ -64,8 +64,10 @@ Facture.Reservation=Facture.belongsTo(Reservation,{as:"reservation"})
 //------------------- Reclamation-User ------------------
 
 //------------------- Reclamation-Technicien ------------------
-Technicien.Reclamation = Technicien.hasMany(Reclamation,{as:"reclamations"})
+Technicien.Reclamation = Technicien.hasMany(Reclamation,{as:"reclamations",foreignKey:"technicienId"})
 Reclamation.Technicien = Reclamation.belongsTo(Technicien,{as:"technicien"})
 //------------------- Technicien-Reservation ------------------
+
+//------------------- Technicien-Succursale ------------------
 
 //------------------- Technicien-User ------------------
