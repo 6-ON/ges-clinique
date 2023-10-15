@@ -43,13 +43,16 @@ User.Client = User.belongsTo(Client, {
 });
 
 //------------------- Client-Reservation ------------------
+Client.Reservation = Client.hasMany(Reservation,{as:"reservations"})
+Reservation.Client = Reservation.belongsTo(Client,{as:"client"})
 
 //------------------- Client-EntrepriseDetail ------------------
 
 //------------------- Client-Employee ------------------
 
 //------------------- Service-ExigenceService ------------------
-
+Service.ExigenceService = Service.hasMany(ExigenceService,{as:"exigenceService"})
+ExigenceService.Service = ExigenceService.belongsTo(Service)
 //------------------- Service-Succursale ------------------
 
 //------------------- Service-Reservation ------------------
@@ -59,7 +62,8 @@ User.Client = User.belongsTo(Client, {
 //------------------- Reclamation-User ------------------
 
 //------------------- Reclamation-Technicien ------------------
-
+Technicien.Reclamation = Technicien.hasMany(Reclamation,{as:"reclamations"})
+Reclamation.Technicien = Reclamation.belongsTo(Technicien,{as:"technicien"})
 //------------------- Technicien-Reservation ------------------
 
 //------------------- Technicien-User ------------------
