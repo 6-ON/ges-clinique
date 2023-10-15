@@ -54,11 +54,13 @@ Reservation.Client = Reservation.belongsTo(Client,{as:"client"})
 Service.ExigenceService = Service.hasMany(ExigenceService,{as:"exigenceService"})
 ExigenceService.Service = ExigenceService.belongsTo(Service)
 //------------------- Service-Succursale ------------------
-
+Succursale.Service = Succursale.belongsToMany(Service,{as:"services",through:ServiceSuccursale})
+Service.Succursale = Service.belongsToMany(Succursale,{as:"succursales",through:ServiceSuccursale})
 //------------------- Service-Reservation ------------------
 
 //------------------- Reservation-Facture ------------------
-
+Reservation.Facture=Reservation.hasOne(Facture,{as:"facture"})
+Facture.Reservation=Facture.belongsTo(Reservation,{as:"reservation"})
 //------------------- Reclamation-User ------------------
 
 //------------------- Reclamation-Technicien ------------------
