@@ -54,11 +54,13 @@ User.Client = User.belongsTo(Client, {
 //------------------- Service-ExigenceService ------------------
 
 //------------------- Service-Succursale ------------------
-
+Succursale.Service = Succursale.hasMany(Service);
+Service.Succursale = Service.belongsTo(Succursale);
 //------------------- Service-Reservation ------------------
 
 //------------------- Reservation-Facture ------------------
-
+Reservation.Facture=Reservation.hasOne(Facture);
+Facture.Reservation=Facture.belongsTo(Reservation);
 //------------------- Reclamation-User ------------------
 
 //------------------- Reclamation-Technicien ------------------
