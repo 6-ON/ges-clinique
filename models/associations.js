@@ -14,8 +14,8 @@ import {
 	User,
 } from ".";
 //-------------------- Chef-Succursale --------------------
-Succursale.hasOne(Chef);
-Chef.belongsTo(Succursale);
+Succursale.Chef = Succursale.hasOne(Chef, { as: "chef" });
+Chef.Succursale = Chef.belongsTo(Succursale, { as: "succursale" });
 //------------------ Chef-User -------------------
 Chef.User = Chef.hasOne(User, {
 	foreignKey: "userableId",
@@ -30,7 +30,7 @@ User.Chef = User.belongsTo(Chef, {
 });
 
 //------------------- Client-User ------------------
-Client.User = Client.hasOne(User,{
+Client.User = Client.hasOne(User, {
 	foreignKey: "userableId",
 	constraints: false,
 	scope: { userableType: "Client" },
@@ -42,17 +42,13 @@ User.Client = User.belongsTo(Client, {
 	as: "client",
 });
 
-
-//------------------- Client-Entreprise ------------------
-
-
 //------------------- Client-Reservation ------------------
 Client.Reservation = Client.hasMany(Reservation,{as:"reservations"})
 Reservation.Client = Reservation.belongsTo(Client,{as:"client"})
 
-//------------------- Entreprise-EntrepriseDetail ------------------
+//------------------- Client-EntrepriseDetail ------------------
 
-//------------------- Entreprise-Employee ------------------
+//------------------- Client-Employee ------------------
 
 //------------------- Service-ExigenceService ------------------
 Service.ExigenceService = Service.hasMany(ExigenceService,{as:"exigenceService"})
