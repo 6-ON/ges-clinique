@@ -14,7 +14,7 @@ import {
 	User,
 } from ".";
 //-------------------- Chef-Succursale --------------------
-Succursale.Chef = Succursale.hasOne(Chef, { as: "chef" });
+Succursale.Chef = Succursale.hasOne(Chef, { as: "chef", foreignKey: "succursaleId" });
 Chef.Succursale = Chef.belongsTo(Succursale, { as: "succursale" });
 //------------------ Chef-User -------------------
 Chef.User = Chef.hasOne(User, {
