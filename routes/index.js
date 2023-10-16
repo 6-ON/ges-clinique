@@ -1,8 +1,7 @@
-import { Router } from "express";
-
+import { Router,json } from "express";
+import chefRoutes from "./ChefRoutes";
 const router = Router();
-router.get("/", (req, res) => {
-	res.send("Hello World!");
-});
+router.use(json())
+router.use("/chefs", chefRoutes);
 
 export default router;
