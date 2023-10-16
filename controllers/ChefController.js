@@ -1,36 +1,36 @@
 /**
  * @typedef {import("express").Request} Request
- * @typedef {import("express").Request} Response
+ * @typedef {import("express").Response} Response
  */
 
 export const ChefController = {
 	/**
 	 * @param {Request} req
-	 * @param {Request} res
+	 * @param {Response} res
 	 */
 	index: (req, res) => {},
 	/**
 	 * @param {Request} req
-	 * @param {Request} res
+	 * @param {Response} res
 	 */
 	/**
 	 * @param {Request} req
-	 * @param {Request} res
+	 * @param {Response} res
 	 */
 	create: (req, res) => {},
 	/**
 	 * @param {Request} req
-	 * @param {Request} res
+	 * @param {Response} res
 	 */
 	show: (req, res) => {},
 	/**
 	 * @param {Request} req
-	 * @param {Request} res
+	 * @param {Response} res
 	 */
 	update: (req, res) => {},
 	/**
 	 * @param {Request} req
-	 * @param {Request} res
+	 * @param {Response} res
 	 */
 	delete: (req, res) => {},
 };
