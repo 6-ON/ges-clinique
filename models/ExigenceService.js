@@ -7,13 +7,16 @@ export const ExigenceService = Sequelize.define("ExigenceService", {
 		allowNull: false,
 		primaryKey: true,
 	},
-	name: {
+	title: {
 		type: DataTypes.STRING,
+		allowNull: false,
 	},
 	type: {
 		type: DataTypes.STRING,
+		allowNull: false,
 	},
-	description: {
-		type: DataTypes.STRING,
+	requiered: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
 	},
 });

@@ -9,5 +9,4 @@ export const Technicien = sequelize.define("Technicien", {
 		primaryKey: true,
 	},
 	specialite: { type: DataTypes.STRING, allowNull: false },
-	disponibilite: { type: DataTypes.BOOLEAN, allowNull: false },
 });

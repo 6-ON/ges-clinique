@@ -9,5 +9,7 @@ export const Succursale = sequelize.define("Succursale", {
 		primaryKey: true,
 	},
 	name: { type: DataTypes.STRING, allowNull: false },
+	startHour: { type: DataTypes.STRING, allowNull: false },
+	endHour: { type: DataTypes.STRING, allowNull: false },
 	image: { type: DataTypes.STRING },
 });
