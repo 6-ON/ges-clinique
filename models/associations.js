@@ -66,8 +66,8 @@ Reservation.Service = Reservation.belongsTo(Service, { as: "service" });
 Reservation.Facture = Reservation.hasOne(Facture, { as: "facture" });
 Facture.Reservation = Facture.belongsTo(Reservation, { as: "reservation" });
 //------------------- Reclamation-User ------------------
-Reclamation.User=Reclamation.belongsTo(User,{as:"user",foreignKey:"userId"})
-User.Reclamation=User.hasMany(Reclamation,{as:"reclamations",foreignKey:"userId"})
+Reclamation.User = Reclamation.belongsTo(User, { as: "user", foreignKey: "userId" });
+User.Reclamation = User.hasMany(Reclamation, { as: "reclamations", foreignKey: "userId" });
 //------------------- Reclamation-Technicien ------------------
 Technicien.Reclamation = Technicien.hasMany(Reclamation, { as: "reclamations", foreignKey: "technicienId" });
 Reclamation.Technicien = Reclamation.belongsTo(Technicien, { as: "technicien" });
