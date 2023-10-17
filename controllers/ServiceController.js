@@ -14,8 +14,8 @@ export const ServiceController = {
 	 **/
 	index: async (req, res) => {
 		try {
-			const Services = await Service.findAll();
-			return res.send(Services)
+			const services = await Service.findAll();
+			return res.send(services)
 		} catch (error) {
 			return res.status(500).send("Erreur");
 		}
