@@ -12,7 +12,7 @@ router.use("/chefs", chefRoutes);
 router.use("/auth", AuthRoutes)
 router.use("/services", serviceRoutes);
 router.use("/techniciens", technicienRoutes);
-router.use("/clients", ClientRoutes);
+router.use("/clients", ClientRoutes); 
 
 
 

@@ -67,7 +67,7 @@ export const ClientController = {
 	update: (req, res) => {},
 	/**
 	 * @param {Request} req
-	 * @param {Response} res
+	 * @param {Response} res 
 	 */
 	delete: async (req, res) => {
 		try {

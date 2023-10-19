@@ -3,7 +3,7 @@ import logger from "../utils/logger";
 import request from "supertest";
 describe("GET /", () => {
 	it("should add client", async () => {
-		const { body, statusCode } = await request(app)
+		const { body, statusCode } = await request(app) 
 			.post("/clients")
 			.accept("application/json")
 			.send({
