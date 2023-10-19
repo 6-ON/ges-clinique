@@ -4,7 +4,6 @@
  */
 import { ValidationError } from "joi";
 import { hash } from "argon2";
-import { SequelizeBaseError } from "sequelize";
 import { creatTechnicienSchema, updateTechnicienSchema } from "../validations";
 import { Technicien } from "../models";
 
@@ -63,7 +62,12 @@ export const TechnicienController = {
 					id: req.params.id,
 				},
 			});
-			res.status(201).json(returnedTechnicien);
+			if(returnedTechnicien){
+
+				res.status(201).json(returnedTechnicien);
+			}else{
+				res.status(404).json({ message: "Technicien not found" });
+			}
 		} catch (err) {
 			res.status(500).json(err);
 		}
@@ -86,12 +90,16 @@ export const TechnicienController = {
 	 */
 	delete: async (req, res) => {
 		try {
-			await Technicien.destroy({
+			const sup = await Technicien.destroy({
 				where: {
 					id: req.params.id,
 				},
 			});
-			res.status(201).json({ message: "technicien deleted" });
+			if (sup == 1) {
+				res.status(201).json({ message: "Technicien deleted" });
+			} else {
+				res.status(404).json({ message: "Technicien not found" });
+			}
 		} catch (err) {
 			res.status(500).json(err);
 		}

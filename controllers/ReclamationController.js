@@ -3,7 +3,6 @@
  * @typedef {import("express").Response} Response
  */
 import { ValidationError } from "joi";
-import { hash } from "argon2";
 import { creatReclamationSchema, updateReclamationSchema } from "../validations";
 import { Reclamation } from "../models";
 import { log } from "winston";
@@ -36,9 +35,17 @@ export const ReclamationController = {
 			res.status(201).json(returnedReclamation);
 		} catch (err) {
 			if (err instanceof ValidationError) {
-				return res.status(400).json(err.details[0].message);
+				res.status(400).json(err.details[0].message);
+			} else if (err?.name.includes("Sequelize")) {
+				res.status(500).json(
+					err.errors.map((error) => {
+						const { message, path } = error;
+						return { message, path };
+					}),
+				);
+			} else {
+				res.status(500).json(err);
 			}
-			return res.status(500).json(err);
 		}
 	},
 	/**
@@ -85,10 +92,9 @@ export const ReclamationController = {
 					id: req.params.id,
 				},
 			});
-			if(sup==1){
-
+			if (sup == 1) {
 				res.status(201).json({ message: "Reclamation deleted" });
-			}else{
+			} else {
 				res.status(404).json({ message: "Reclamation not found" });
 			}
 		} catch (err) {

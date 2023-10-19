@@ -38,8 +38,16 @@ export const EmployeeController = {
 		} catch (err) {
 			if (err instanceof ValidationError) {
 				res.status(400).json(err.details[0].message);
+			} else if (err?.name.includes("Sequelize")) {
+				res.status(500).json(
+					err.errors.map((error) => {
+						const { message, path } = error;
+						return { message, path };
+					}),
+				);
+			} else {
+				res.status(500).json(err);
 			}
-			res.status(500).json(err);
 		}
 	},
 	/**
