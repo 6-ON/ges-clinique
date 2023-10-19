@@ -47,8 +47,8 @@ Client.Reservation = Client.hasMany(Reservation, { as: "reservations", foreignKe
 Reservation.Client = Reservation.belongsTo(Client, { as: "client" });
 
 //------------------- Client-EntrepriseDetail ------------------
-Client.EntrepriseDetail = Client.hasOne(EntrepriseDetail, { as: "entrepriseDetail" });
-EntrepriseDetail.Client = EntrepriseDetail.belongsTo(Client);
+Client.EntrepriseDetail = Client.hasOne(EntrepriseDetail, { as: "entrepriseDetail", foreignKey: "clientId" });
+EntrepriseDetail.Client = EntrepriseDetail.belongsTo(Client, { as: "client" });
 
 //------------------- Client-Employee ------------------
 Employee.Client = Employee.belongsTo(Client, { as: "client", foreignKey: "clientId" });
@@ -63,7 +63,7 @@ Service.Succursale = Service.belongsToMany(Succursale, { as: "succursales", thro
 Service.Reservation = Service.hasMany(Reservation, { as: "reservations", foreignKey: "serviceId" });
 Reservation.Service = Reservation.belongsTo(Service, { as: "service" });
 //------------------- Reservation-Facture ------------------
-Reservation.Facture = Reservation.hasOne(Facture, { as: "facture" });
+Reservation.Facture = Reservation.hasOne(Facture, { as: "facture",foreignKey: "reservationId" });
 Facture.Reservation = Facture.belongsTo(Reservation, { as: "reservation" });
 //------------------- Reclamation-User ------------------
 Reclamation.User = Reclamation.belongsTo(User, { as: "user", foreignKey: "userId" });
