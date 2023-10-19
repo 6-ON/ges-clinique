@@ -8,7 +8,7 @@ describe("FactureController", () => {
 	it("should add Facture ", async () => {
 		const FactureData = {
 
-			montant: "100",
+			montant: faker.number.binary(),
 			datePaiement: faker.date.recent(),
 			reservationId: "1"
 		};

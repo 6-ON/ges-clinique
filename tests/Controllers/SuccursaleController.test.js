@@ -9,8 +9,8 @@ describe("SuccursaleController", () => {
 		const SuccursaleData = {
 
 			name: faker.commerce.productName(),
-			startHour: faker.lorem.paragraph(),
-			endHour: faker.finance.amount(),
+			startHour: faker.number.int({ min: 9, max: 18 }),
+			endHour: faker.number.int({ min: 9, max: 18 }),
 			image: faker.image.urlLoremFlickr({ width: 640, height: 480, category: "human" }),
 
 		};
