@@ -8,8 +8,7 @@ describe("POST /", () => {
 			email: "john.doe@example.com",
 			password: "passhword123",
 		});
-        logger.info(response.body)
-        logger.info(response.statusCode)
-
+		logger.info(response.body);
+		logger.info(response.statusCode);
 	});
 });
