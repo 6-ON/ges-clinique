@@ -7,7 +7,7 @@ export const Facture = sequelize.define("Facture", {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	DatePaiement: {
+	datePaiement: {
 		type: DataTypes.DATE,
 		allowNull: false,
 	},
