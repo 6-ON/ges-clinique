@@ -6,7 +6,6 @@
 import { ValidationError } from "joi";
 
 /**
- * @param {Request} req
  * @param {Response} res
  * @param {Error} err
  */
