@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config";
+import { hash } from "argon2";
 
 export const User = sequelize.define(
 	"User",
@@ -28,7 +29,6 @@ export const User = sequelize.define(
 		},
 		phone: {
 			type: DataTypes.STRING,
-			allowNull: false,
 		},
 		image: {
 			type: DataTypes.STRING,
@@ -48,6 +48,16 @@ export const User = sequelize.define(
 	{
 		defaultScope: {
 			attributes: { exclude: ["password"] },
+		},
+		hooks: {
+			beforeCreate: async (user) => {
+				user.password = await hash(user.password);
+			},
+			beforeUpdate: async (user) => {
+				if (user.changed("password")) {
+					user.password = await hash(user.password);
+				}
+			},
 		},
 	},
 );
