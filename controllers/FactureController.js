@@ -5,7 +5,8 @@
 
 import { ValidationError } from "joi";
 import { createFactureSchema, updateFactureSchema } from "../validations";
-
+import { hash } from "argon2";
+import catchHandler from "../utils/CatchHandler";
 import { Facture } from "../models"
 export const FactureController = {
 	/**
@@ -15,9 +16,9 @@ export const FactureController = {
 	index: async (req, res) => {
 		try {
 			const factures = await Facture.findAll();
-			return res.send(factures)
-		} catch (error) {
-			return res.status(500).send("Erreur");
+			return res.status(200).json(factures.map((Facture) =>Facture.toJSON()));
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 
 	},
@@ -26,12 +27,13 @@ export const FactureController = {
 	 * @param {Response} res
 	 */
 	show: async (req, res) => {
-		const id = req.params;
 		try {
+			const { id } = req.params;
 			const facture = await Facture.findByPk(id);
-			return res.send(facture);
-		} catch (error) {
-			return res.status(500).send("erreur");
+			if (!facture) return res.status(404).json("facture not found");
+			return res.status(200).json(facture.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 	/**
@@ -54,36 +56,28 @@ export const FactureController = {
 	},
 
 	update: async (req, res) => {
-		const id = req.params.id; // Assurez-vous d'obtenir l'ID à partir des paramètres de la requête
 		try {
-			const facture = await updateFactureSchema.validateAsync(req.body);
-			const updatedFacture = await Facture.findByPk(id);
-			if (!updatedFacture) {
-				return res.status(500).send("Facture non trouvé");
-			}
-			await updatedFacture.update(facture);
-			const returnedFacture = updatedFacture.get({ plain: true });
-			res.status(201).json(returnedFacture);
-		} catch (error) {
-			if (error instanceof ValidationError) {
-				res.status(400).json(error.details[0].message);
-			} else {
-				res.status(500).json(error);
-			}
+			const validatedfacture = await updateFactureSchema.validateAsync(req.body);
+			const { id } = req.params;
+			const facture = await Facture.findByPk(id);
+			if (!facture) return res.status(404).json("facture not found");
+			const updatedfacture = await facture .update(validatedfacture);
+		
+			return res.status(200).json(updatedfacture.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 
 	delete: async (req, res) => {
-		const id = req.params.id; // Assurez-vous d'obtenir l'ID à partir des paramètres de la requête
 		try {
-			const facture = await Facture.findByPk(id);
-			if (!facture) {
-				return res.status(500).send("Facture non trouvé");
-			}
-			await sacture.destroy();
-			return res.status(200).send("Facture supprimé");
-		} catch (error) {
-			res.status(500).send("Erreur");
+			const { id } = req.params;
+			const facture = await  Facture.findByPk(id);
+			if (!facture) return res.status(404).json("facture not found");
+			await facture.destroy();
+			return res.status(204).end();
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	}
 }
