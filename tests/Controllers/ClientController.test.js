@@ -1,5 +1,5 @@
-import app from "../app";
-import logger from "../utils/logger";
+import app from "../../app";
+import logger from "../../utils/logger";
 import request from "supertest";
 describe("GET /", () => {
 	it("should add client", async () => {
