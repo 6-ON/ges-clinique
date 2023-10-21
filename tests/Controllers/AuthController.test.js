@@ -1,6 +1,6 @@
-import app from "../app";
+import app from "../../app";
 import request from "supertest";
-import logger from "../utils/logger";
+import logger from "../../utils/logger";
 
 describe("POST /", () => {
 	it("should login", async () => {
@@ -12,4 +12,3 @@ describe("POST /", () => {
 		logger.info(response.statusCode);
 	});
 });
- 
