@@ -2,11 +2,9 @@
  * @typedef {import("express").Request} Request
  * @typedef {import("express").Response} Response
  */
-import { ValidationError } from "joi";
-import { hash } from "argon2";
 import { creatTechnicienSchema, updateTechnicienSchema } from "../validations";
 import { Technicien } from "../models";
-
+import catchHandler from "../utils/CatchHandler";
 export const TechnicienController = {
 	/**
 	 * @param {Request} req
@@ -15,9 +13,9 @@ export const TechnicienController = {
 	index: async (req, res) => {
 		try {
 			const returnedTechniciens = await Technicien.findAll();
-			res.status(201).json(returnedTechniciens);
+			return res.status(201).json(returnedTechniciens);
 		} catch (err) {
-			res.status(500).json(err);
+			return res.status(500).json(err);
 		}
 	},
 	/**
@@ -28,27 +26,15 @@ export const TechnicienController = {
 		try {
 			const technicien = await creatTechnicienSchema.validateAsync(req.body);
 			// save to db
-			technicien.user.password = await hash(technicien.user.password);
 			const createdTechnicien = await Technicien.create(technicien, {
 				include: [Technicien.User],
 			});
 
 			const returnedTechnicien = createdTechnicien.get({ plain: true });
 			delete returnedTechnicien.user.password;
-			res.status(201).json(returnedTechnicien);
+			return res.status(201).json(returnedTechnicien);
 		} catch (err) {
-			if (err instanceof ValidationError) {
-				res.status(400).json(err.details[0].message);
-			} else if (err?.name.includes("Sequelize")) {
-				res.status(500).json(
-					err.errors.map((error) => {
-						const { message, path } = error;
-						return { message, path };
-					}),
-				);
-			} else {
-				res.status(500).json(err);
-			}
+			return catchHandler(err, res);
 		}
 	},
 	/**
@@ -62,28 +48,22 @@ export const TechnicienController = {
 					id: req.params.id,
 				},
 			});
-			if(returnedTechnicien){
-
-				res.status(201).json(returnedTechnicien);
-			}else{
-				res.status(404).json({ message: "Technicien not found" });
+			if (returnedTechnicien) {
+				return res.status(201).json(returnedTechnicien);
+			} else {
+				return res.status(404).json({ message: "Technicien not found" });
 			}
 		} catch (err) {
-			res.status(500).json(err);
+			return catchHandler(err, res);
 		}
 	},
 	/**
 	 * @param {Request} req
 	 * @param {Response} res
+	 * @todo implement update
+	 * @see ./ChefController.js
 	 */
-	update: async (req, res) => {
-		// const updatedTechnicien = await updateTechnicienSchema.validateAsync(req.body);
-		// await Technicien.update(updatedTechnicien, {
-		// 	where: {
-		// 		id: req.params.id,
-		// 	},
-		// });
-	},
+	update: async (req, res) => {},
 	/**
 	 * @param {Request} req
 	 * @param {Response} res
@@ -96,12 +76,12 @@ export const TechnicienController = {
 				},
 			});
 			if (sup == 1) {
-				res.status(201).json({ message: "Technicien deleted" });
+				return res.status(201).json({ message: "Technicien deleted" });
 			} else {
-				res.status(404).json({ message: "Technicien not found" });
+				return res.status(404).json({ message: "Technicien not found" });
 			}
 		} catch (err) {
-			res.status(500).json(err);
+			return catchHandler(err, res);
 		}
 	},
 };
