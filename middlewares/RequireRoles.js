@@ -4,8 +4,10 @@
  */
 
 import { verifyToken } from "../utils/jwt";
-
-export const RequireRole = (role) => {
+/**
+ * @param {Array<string>} roles 
+ */
+export const RequireRoles = (roles) => {
 	/**
 	 * @param {Request} req
 	 * @param {Response} res
@@ -22,7 +24,7 @@ export const RequireRole = (role) => {
 		// verify token
 		const decoded = await verifyToken(token);
 		if (!decoded) return res.status(401).json("Unauthorized");
-		if (decoded.role.toLowerCase() !== role) return res.status(403).json("Forbidden");
+		if (roles.includes(decoded.role.toLowerCase())) return res.status(403).json("Forbidden");
 		//include User.Chef or User.Technicien or User.Client basel on role
 		req.user = decoded;
 		next();
