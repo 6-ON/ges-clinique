@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "nodemon --exec babel-node ./server.js",
 		"build": "babel ./ -d dist",
+		"db:seed": "babel-node ./seeders",
 		"db:sync": "babel-node ./scripts/syncDB.js"
 	},
 	"dependencies": {
