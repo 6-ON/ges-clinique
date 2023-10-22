@@ -28,7 +28,7 @@ export const AuthController = {
 			const { password: hash, ...returnedUser } = user.get({ plain: true });
 			const isSame = await verify(hash, password);
 			if (!isSame) return res.status(401).json({ message: "Authentication failed" });
-			const token = await signToken({ id: user.id, email: user.email, role: user.userableType });
+			const token = await signToken({ id: user.id, email: user.email, role: user.userableType , userableId:user.userableId });
 			return res.status(201).json({
 				token,
 				user: returnedUser,
