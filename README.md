@@ -13,7 +13,6 @@
             background-color: #f5f5f5;
             color: #333;
         }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -21,39 +20,32 @@
             background-color: white;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         }
-
-        h1 {
+		       h1 {
             color: #4CAF50;
             text-align: center;
         }
-
-        h2 {
+ h2 {
             color: #4CAF50;
             font-size: 1.5em;
         }
-
-        nav {
+nav {
             background-color: #4CAF50;
             color: white;
             padding: 10px;
             text-align: center;
         }
-
-        nav a {
+ nav a {
             color: white;
             text-decoration: none;
             margin: 0 15px;
         }
-
-        nav a:hover {
+ nav a:hover {
             text-decoration: underline;
         }
-
-        .section {
+ .section {
             margin-bottom: 30px;
         }
-
-        p {
+ p {
             line-height: 1.6;
             font-size: 1.1em;
         }
@@ -69,36 +61,34 @@
         <a href="#usage">Utilisation de l'Application</a>
         <a href="#troubleshooting">Dépannage</a>
     </nav>
-
-    <div class="container">
+ <div class="container">
         <h1>Documentation de l'Application - GES-Clinique</h1>
-
         <div class="section" id="introduction">
             <h2>1. Introduction</h2>
             <p>GES-Clinique est une application backend développée avec Node.js, Express.js et Sequelize, offrant une gestion avancée des rendez-vous pour les cliniques...</p>
         </div>
 
-        <div class="section" id="features">
+ <div class="section" id="features">
             <h2>2. Fonctionnalités Principales</h2>
             <p>... (Contenu des fonctionnalités principales ici) ...</p>
         </div>
 
-        <div class="section" id="users">
+ <div class="section" id="users">
             <h2>3. Utilisateurs et Rôles</h2>
             <p>... (Contenu des utilisateurs et rôles ici) ...</p>
         </div>
 
-        <div class="section" id="installation">
+ <div class="section" id="installation">
             <h2>4. Guide d'Installation</h2>
             <p>... (Contenu du guide d'installation ici) ...</p>
         </div>
 
-        <div class="section" id="usage">
+<div class="section" id="usage">
             <h2>5. Utilisation de l'Application</h2>
             <p>... (Contenu de l'utilisation de l'application ici) ...</p>
         </div>
 
-        <div class="section" id="troubleshooting">
+<div class="section" id="troubleshooting">
             <h2>6. Dépannage</h2>
             <p>... (Contenu du dépannage ici) ...</p>
         </div>
