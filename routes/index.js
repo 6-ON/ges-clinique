@@ -13,14 +13,16 @@ import factureRoutes from "./FactureRoutes";
 import succursaleRoutes from "./SuccursaleRoutes";
 import adminRoutes from "./AdminRoutes";
 import entrepriseRoutes from "./EntrepriseRoutes";
-import { RequireRoles } from "../middlewares";
+import { RequireRoles, authenticate } from "../middlewares";
 
 const router = Router();
 router.use(json())
+router.use("/auth", AuthRoutes);
+router.use(authenticate);
 router.use("/reclamations", ReclamationRoutes);
 router.use("/employees", EmployeeRoutes);
 router.use("/chefs", chefRoutes);
-router.use("/auth", AuthRoutes)
+
 router.use("/services", serviceRoutes);
 router.use("/factures",factureRoutes);
 router.use("/succursales",succursaleRoutes);
