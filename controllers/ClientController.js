@@ -13,11 +13,11 @@ export const ClientController = {
 	 */
 	index: async (req, res) => {
 		try {
-			const clients = await Client.findAll();
+			const clients = await Client.scope("individual").findAll({ include: [Client.User] });
 			return res.status(200).json(clients);
 		} catch (error) {
 			// Handle the error and send an error response
-			return catchHandler(err, res);
+			return catchHandler(error, res);
 		}
 	},
 	/**
