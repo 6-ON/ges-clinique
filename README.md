@@ -46,7 +46,7 @@ NODE_ENV=production
 #### 4.2.3 Installation des Dépendances
 Installez les dépendances Node.js et lancez l'application :
 
-    <code>npm install</code>
+    npm install
 
 
 #### 4.2.4 Configuration de la Base de Données
