@@ -53,11 +53,24 @@ export const User = sequelize.define(
 			beforeCreate: async (user) => {
 				user.password = await hash(user.password);
 			},
+			beforeBulkCreate: async (users) => {
+				for (const user of users) {
+					user.password = await hash(user.password);
+				}
+			},
 			beforeUpdate: async (user) => {
 				if (user.changed("password")) {
 					user.password = await hash(user.password);
 				}
 			},
+		},
+		scopes: {
+			admins: {
+				where: {
+					userableType: "Admin",
+				},
+			},
+			
 		},
 	},
 );
