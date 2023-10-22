@@ -7,6 +7,6 @@
 export const RequireSelfOrAdmin = async (req, res, next) => {
 	// chek if user is self
 	const { id } = req.params;
-	if (req.user.id !== id && ["admin", "sadmin"].includes(req.user.role?.toLowerCase() || "")) return res.status(403).json("Forbidden");
+	if (req.user.id !== id && !(["admin", "superadmin"].includes(req.user.role?.toLowerCase()) )) return res.status(403).json("Forbidden");
 	next();
 };

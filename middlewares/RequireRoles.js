@@ -30,3 +30,4 @@ export const RequireRoles = (roles) => {
 		next();
 	};
 };
+RequireRoles(["admin", "chef", "technicien", "client"])
