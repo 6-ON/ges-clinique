@@ -2,7 +2,7 @@
  * @typedef {import("express").Request} Request
  * @typedef {import("express").Response} Response
  */
-import { creatReservationSchema } from "../validations";
+import { creatReservationSchema, updateReservationSchema } from "../validations";
 import { Reservation } from "../models";
 import catchHandler from "../utils/CatchHandler";
 
@@ -44,6 +44,22 @@ export const ClientReservationController = {
 			return res.status(200).json(reservation);
 		} catch (error) {
 			return catchHandler(err, res);
+		}
+	},
+	/**
+	 * @param {Request} req
+	 * @param {Response} res
+	 */
+	update: async (req, res) => {
+		try {
+			const validateReservation = await updateReservationSchema.validateAsync(req.body)
+			const {id} = req.params
+			const reservation = await Reservation.findByPk(id)
+			if (!reservation) return res.status(404).json("reservation not found")
+			await reservation.update({...validateReservation , technicienId:req.user.userableId})
+			return res.status(200).json(reservation.toJSON())
+		} catch (err) {
+			return catchHandler(err, res)
 		}
 	},
 };

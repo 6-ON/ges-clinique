@@ -5,6 +5,5 @@ export const creatReservationSchema = Joi.object({
 });
 
 export const updateReservationSchema = Joi.object({
-	status: Joi.string().required(),
-	technicienId: Joi.number().required(),
+	status: Joi.number().required(),
 });
