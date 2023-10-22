@@ -31,16 +31,16 @@ GES-Clinique est une application backend développée avec Node.js, Express.js, 
 #### 4.2.1 Téléchargement du Code Source
 Clonez le référentiel depuis GitHub :
 
-    <code>git clone https://github.com/6-ON/ges-clinique.git</code>
+    git clone https://github.com/6-ON/ges-clinique.git
 
 
 #### 4.2.2 Configuration de l'Environnement
 Créez un fichier '.env' à la racine du projet avec les configurations suivantes :
-<code>DB_HOST=localhost
+DB_HOST=localhost
 DB_USER=votre_utilisateur_db
 DB_PASSWORD=votre_mot_de_passe_db
 DB_DATABASE=ges_clinique_db
-NODE_ENV=production</code>
+NODE_ENV=production
 
 
 #### 4.2.3 Installation des Dépendances
@@ -52,7 +52,7 @@ Installez les dépendances Node.js et lancez l'application :
 #### 4.2.4 Configuration de la Base de Données
 Pour synchroniser la base de données, exécutez :
 
-    <code>npm run db:sync</code>
+    npm run db:sync
 
 
 ## 5. Utilisation de l'Application
