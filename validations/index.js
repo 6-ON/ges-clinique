@@ -8,3 +8,4 @@ export * from "./Service";
 export * from "./Facture";
 export * from "./Succursale";
 export * from "./Client";
+export * from "./Employee";
