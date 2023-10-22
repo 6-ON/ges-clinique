@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/";
 import { EntrepriseDetail } from "./EntrepriseDetail";
+import { User } from "./User";
 
 export const Client = sequelize.define(
 	"Client",
@@ -13,6 +14,9 @@ export const Client = sequelize.define(
 		},
 	},
 	{
+		defaultScope: {
+			include: [{ model: User, as: "user" }],
+		},
 		scopes: {
 			entreprises: {
 				include: [
