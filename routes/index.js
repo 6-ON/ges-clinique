@@ -2,6 +2,7 @@ import { Router,json } from "express";
 import chefRoutes from "./ChefRoutes";
 
 import ReclamationRoutes from "./ReclamationRoutes";
+import ReservationRoutes from "./ReservationRoutes";
 import EmployeeRoutes from "./EmployeeRoutes";
 
 import ClientRoutes from "./ClientRoutes";
@@ -20,6 +21,7 @@ router.use(json())
 router.use("/auth", AuthRoutes);
 router.use(authenticate);
 router.use("/reclamations", ReclamationRoutes);
+router.use("/reservations", ReservationRoutes);
 router.use("/employees", EmployeeRoutes);
 router.use("/chefs", chefRoutes);
 

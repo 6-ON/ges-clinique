@@ -1,9 +1,9 @@
 import { verify, sign } from "jsonwebtoken";
 import "dotenv/config";
 import { promisify } from "util";
-export async function signToken({ id, email, role }) {
+export async function signToken({ id, email, role ,userableId }) {
 	const signAsync = promisify(sign);
-	return await signAsync({ id, email, role }, process.env.SECRET_TOKEN, { expiresIn: "1h" });
+	return await signAsync({ id, email, role, userableId }, process.env.SECRET_TOKEN, { expiresIn: "1h" });
 }
 
 export async function verifyToken(token) {

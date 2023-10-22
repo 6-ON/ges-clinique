@@ -5,7 +5,7 @@ export * from "./ClientEntrepriseController";
 export * from "./EmployeeController";
 export * from "./FactureController";
 export * from "./ReclamationController";
-export * from "./ReservationController";
+export * from "./ClientReservationController";
 export * from "./ServiceController";
 export * from "./SuccursaleController";
 export * from "./TechnicienController";
