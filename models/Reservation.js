@@ -12,6 +12,7 @@ export const Reservation = Sequelize.define("Reservation", {
 	},
 	status: {
 		type: DataTypes.BOOLEAN,
+		defaultValue: "1"
 	},
 	date: {
 		type: DataTypes.DATE,
