@@ -5,7 +5,6 @@
 
 import { creatChefSchema, updateChefSchema } from "../validations";
 import { Chef } from "../models";
-import { hash } from "argon2";
 import catchHandler from "../utils/CatchHandler";
 
 export const ChefController = {
@@ -28,7 +27,6 @@ export const ChefController = {
 	create: async (req, res) => {
 		try {
 			const chef = await creatChefSchema.validateAsync(req.body);
-			chef.user.password = await hash(chef.user.password);
 			const createdChef = await Chef.create(chef, {
 				include: [Chef.User],
 			});
