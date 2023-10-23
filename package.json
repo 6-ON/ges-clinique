@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon --exec babel-node ./server.js",
+		"start:dev": "nodemon --exec babel-node ./server.js",
+		"start": "babel-node ./server.js",
 		"build": "babel ./ -d dist",
 		"db:seed": "babel-node ./seeders",
 		"db:sync": "babel-node ./scripts/syncDB.js"
