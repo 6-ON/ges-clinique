@@ -5,7 +5,8 @@
 
 import { ValidationError } from "joi";
 import { createSuccursaleSchema, updateSuccursaleSchema } from "../validations";
-
+import { hash } from "argon2";
+import catchHandler from "../utils/CatchHandler";
 import { Succursale } from "../models"
 export const SuccursaleController = {
 	/**
@@ -15,9 +16,9 @@ export const SuccursaleController = {
 	index: async (req, res) => {
 		try {
 			const succursales = await Succursale.findAll();
-			return res.send(succursales)
-		} catch (error) {
-			return res.status(500).send("Erreur");
+			return res.status(200).json(succursales.map((Succursale) =>Succursale.toJSON()));
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 
 	},
@@ -26,12 +27,13 @@ export const SuccursaleController = {
 	 * @param {Response} res
 	 */
 	show: async (req, res) => {
-		const id = req.params;
 		try {
+			const { id } = req.params;
 			const succursale = await Succursale.findByPk(id);
-			return res.send(succursale);
-		} catch (error) {
-			return res.status(500).send("erreur");
+			if (!succursale) return res.status(404).json("Succursale not found");
+			return res.status(200).json(succursale.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 	/**
@@ -54,36 +56,28 @@ export const SuccursaleController = {
 	},
 
 	update: async (req, res) => {
-		const id = req.params.id; // Assurez-vous d'obtenir l'ID à partir des paramètres de la requête
 		try {
-			const succursale = await updateSuccursaleSchema.validateAsync(req.body);
-			const updatedSuccursale = await Succursale.findByPk(id);
-			if (!updatedSuccursale) {
-				return res.status(500).send("Succursale non trouvé");
-			}
-			await updatedSuccursale.update(succursale);
-			const returnedSuccursale = updatedSuccursale.get({ plain: true });
-			res.status(201).json(returnedSuccursale);
-		} catch (error) {
-			if (error instanceof ValidationError) {
-				res.status(400).json(error.details[0].message);
-			} else {
-				res.status(500).json(error);
-			}
+			const validatedSuccursale = await updateSuccursaleSchema.validateAsync(req.body);
+			const { id } = req.params;
+			const succursale = await Succursale.findByPk(id);
+			if (!succursale) return res.status(404).json("Succursale not found");
+			const updatedSuccursale = await succursale.update(validatedSuccursale);
+		
+			return res.status(200).json(updatedSuccursale.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 
 	delete: async (req, res) => {
-		const id = req.params.id; // Assurez-vous d'obtenir l'ID à partir des paramètres de la requête
 		try {
-			const succursale = await Succursale.findByPk(id);
-			if (!succursale) {
-				return res.status(500).send("Succursale non trouvé");
-			}
-			await Succursale.destroy();
-			return res.status(200).send("Succursale supprimé");
-		} catch (error) {
-			res.status(500).send("Erreur");
+			const { id } = req.params;
+			const succursale = await  Succursale.findByPk(id);
+			if (!succursale) return res.status(404).json("Succursale not found");
+			await succursale.destroy();
+			return res.status(204).end();
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	}
 }
