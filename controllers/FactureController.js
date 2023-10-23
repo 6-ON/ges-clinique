@@ -45,13 +45,9 @@ export const FactureController = {
 			const facture = await createFactureSchema.validateAsync(req.body);
 			const createdFacture = await Facture.create(facture);
 			const returnedFacture = createdFacture.get({ plain: true });
-			res.status(201).json(returnedFacture);
+			return res.status(201).json(returnedFacture);
 		} catch (error) {
-			if (error instanceof ValidationError) {
-				res.status(400).json(error.details[0].message);
-			} else {
-				res.status(500).json(error);
-			}
+			return catchHandler(error,res)
 		}
 	},
 

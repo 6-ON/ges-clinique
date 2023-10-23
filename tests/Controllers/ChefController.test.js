@@ -6,7 +6,7 @@ function logErrors(err, req, res, next) {
 	return res.status(500).json(err);
 }
 describe("ChefController", () => {
-	it("chef controller test", async () => {
+	it("POST /chefs", async () => {
 		const chefData = {
 			grade: faker.string.alpha({ casing: "upper" }),
 			user: {

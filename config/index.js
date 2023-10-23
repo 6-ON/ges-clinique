@@ -1,11 +1,13 @@
 import { Sequelize } from "sequelize";
 import logger from "../utils/logger";
 import "dotenv/config";
-const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT } = process.env;
+const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, SEQUELIZE_LOG } = process.env;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
 	dialect: "mysql",
+	charset: "utf8",
 	host: DB_HOST,
 	port: DB_PORT,
-	logging: (msg) => logger.info(msg),
+	logging: +SEQUELIZE_LOG ? (msg) => logger.info(msg) : false,
+
 });
 export default sequelize;
