@@ -5,7 +5,8 @@
 
 import { ValidationError } from "joi";
 import { createServiceSchema, updateServiceSchema } from "../validations";
-
+import { hash } from "argon2";
+import catchHandler from "../utils/CatchHandler";
 import { Service } from "../models"
 export const ServiceController = {
 	/**
@@ -15,9 +16,9 @@ export const ServiceController = {
 	index: async (req, res) => {
 		try {
 			const services = await Service.findAll();
-			return res.send(services)
-		} catch (error) {
-			return res.status(500).send("Erreur");
+			return res.status(200).json(services.map((Service) =>Service.toJSON()));
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 
 	},
@@ -26,12 +27,13 @@ export const ServiceController = {
 	 * @param {Response} res
 	 */
 	show: async (req, res) => {
-		const id = req.params;
 		try {
+			const { id } = req.params;
 			const service = await Service.findByPk(id);
-			return res.send(service);
-		} catch (error) {
-			return res.status(500).send("erreur");
+			if (!service) return res.status(404).json("Service not found");
+			return res.status(200).json(service.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 	/**
@@ -54,36 +56,28 @@ export const ServiceController = {
 	},
 
 	update: async (req, res) => {
-		const id = req.params.id; // Assurez-vous d'obtenir l'ID à partir des paramètres de la requête
 		try {
-			const service = await updateServiceSchema.validateAsync(req.body);
-			const updatedService = await Service.findByPk(id);
-			if (!updatedService) {
-				return res.status(500).send("Service non trouvé");
-			}
-			await updatedService.update(service);
-			const returnedService = updatedService.get({ plain: true });
-			res.status(201).json(returnedService);
-		} catch (error) {
-			if (error instanceof ValidationError) {
-				res.status(400).json(error.details[0].message);
-			} else {
-				res.status(500).json(error);
-			}
+			const validatedService = await updateServiceSchema.validateAsync(req.body);
+			const { id } = req.params;
+			const service = await Service.findByPk(id);
+			if (!service) return res.status(404).json("Service not found");
+			const updatedService = await service.update(validatedService);
+		
+			return res.status(200).json(updatedService.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 
 	delete: async (req, res) => {
-		const id = req.params.id; // Assurez-vous d'obtenir l'ID à partir des paramètres de la requête
 		try {
-			const service = await Service.findByPk(id);
-			if (!service) {
-				return res.status(500).send("Service non trouvé");
-			}
+			const { id } = req.params;
+			const service = await  Service.findByPk(id);
+			if (!service) return res.status(404).json("Service not found");
 			await service.destroy();
-			return res.status(200).send("Service supprimé");
-		} catch (error) {
-			res.status(500).send("Erreur");
+			return res.status(204).end();
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	}
 }

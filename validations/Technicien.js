@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { creatUserSchema } from "./User";
+import { creatUserSchema, updateUserSchema } from "./User";
 
 
 export const creatTechnicienSchema = Joi.object({
@@ -8,6 +8,7 @@ export const creatTechnicienSchema = Joi.object({
 	user: creatUserSchema.required()
 });
 export const updateTechnicienSchema = Joi.object({
-	grade : Joi.string().trim().min(1),
-	succursaleId : Joi.number().integer()
+	specialite : Joi.string().trim().min(1),
+	succursaleId : Joi.number().integer(),
+	user: updateUserSchema
 });

@@ -15,7 +15,7 @@ export const TechnicienController = {
 			const returnedTechniciens = await Technicien.findAll();
 			return res.status(201).json(returnedTechniciens);
 		} catch (err) {
-			return res.status(500).json(err);
+			return catchHandler(err, res)
 		}
 	},
 	/**
@@ -49,7 +49,7 @@ export const TechnicienController = {
 				},
 			});
 			if (returnedTechnicien) {
-				return res.status(201).json(returnedTechnicien);
+				return res.status(201).json(returnedTechnicien.toJSON());
 			} else {
 				return res.status(404).json({ message: "Technicien not found" });
 			}
@@ -63,7 +63,22 @@ export const TechnicienController = {
 	 * @todo implement update
 	 * @see ./ChefController.js
 	 */
-	update: async (req, res) => {},
+	update: async (req, res) => {
+		try {
+			const {user: validateUser,...validatedTech} = await updateTechnicienSchema.validateAsync(req.body)
+			const technicien = await Technicien.findByPk(req.user.userableId, { include: [Technicien.User]})
+			if (!technicien) return res.status(404).json("Technicien not found")
+			const updatedTechnicien = await technicien.update(...validatedTech)
+			if (validateUser) {
+				const {user} = technicien
+				await user.update(validateUser)
+				updatedTechnicien.user = user
+			}
+			return res.status(200).json(updatedTechnicien.toJSON())
+		} catch (err) {
+			return catchHandler(err, res)
+		}
+	},
 	/**
 	 * @param {Request} req
 	 * @param {Response} res
