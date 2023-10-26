@@ -23,7 +23,7 @@ export const AdminController = {
 		try {
 			const user = await creatUserSchema.validateAsync(req.body);
 			// save to db
-			const createdUser = await User.create(user);
+			const createdUser = await User.create({...user,userableType:"Admin"});
 
 			const returnedUser = createdUser.get({ plain: true });
 			delete returnedUser.password;
