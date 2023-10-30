@@ -5,9 +5,9 @@
 
 import { ValidationError } from "joi";
 import { createFactureSchema, updateFactureSchema } from "../validations";
-
-import { Facture } from "../models"
+import { hash } from "argon2";
 import catchHandler from "../utils/CatchHandler";
+import { Facture } from "../models"
 export const FactureController = {
 	/**
 	 * @param {Request} req
@@ -16,9 +16,9 @@ export const FactureController = {
 	index: async (req, res) => {
 		try {
 			const factures = await Facture.findAll();
-			return res.send(factures)
-		} catch (error) {
-			return catchHandler(error,res)
+			return res.status(200).json(factures.map((Facture) =>Facture.toJSON()));
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 
 	},
@@ -27,12 +27,13 @@ export const FactureController = {
 	 * @param {Response} res
 	 */
 	show: async (req, res) => {
-		const id = req.params;
 		try {
+			const { id } = req.params;
 			const facture = await Facture.findByPk(id);
-			return res.send(facture);
-		} catch (error) {
-			return catchHandler(error,res)
+			if (!facture) return res.status(404).json("facture not found");
+			return res.status(200).json(facture.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 	/**
@@ -51,33 +52,28 @@ export const FactureController = {
 	},
 
 	update: async (req, res) => {
-		const id = req.params.id; 
 		try {
-			const facture = await updateFactureSchema.validateAsync(req.body);
-			const updatedFacture = await Facture.findByPk(id);
-			if (!updatedFacture) {
-				return res.status(500).send("Facture non trouvé");
-			}
-			await updatedFacture.update(facture);
-			const returnedFacture = updatedFacture.get({ plain: true });
-			return res.status(201).json(returnedFacture);
-		} catch (error) {
-			return catchHandler(error,res)
-
+			const validatedfacture = await updateFactureSchema.validateAsync(req.body);
+			const { id } = req.params;
+			const facture = await Facture.findByPk(id);
+			if (!facture) return res.status(404).json("facture not found");
+			const updatedfacture = await facture .update(validatedfacture);
+		
+			return res.status(200).json(updatedfacture.toJSON());
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	},
 
 	delete: async (req, res) => {
-		const id = req.params.id; 
 		try {
-			const facture = await Facture.findByPk(id);
-			if (!facture) {
-				return res.status(500).send("Facture non trouvé");
-			}
+			const { id } = req.params;
+			const facture = await  Facture.findByPk(id);
+			if (!facture) return res.status(404).json("facture not found");
 			await facture.destroy();
-			return res.status(200).send("Facture supprimé");
-		} catch (error) {
-			return catchHandler(error,res)
+			return res.status(204).end();
+		} catch (err) {
+			return catchHandler(err, res);
 		}
 	}
 }

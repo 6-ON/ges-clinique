@@ -12,10 +12,14 @@ Client.bulkCreate(
 		entrepriseDetail:{
 			name: faker.company.name(),
 			adress: faker.location.streetAddress(),
-		}
+		},
+		employees: [...Array(10)].map(() => ({
+			name: faker.person.fullName(),
+			email: faker.internet.email(),
+		})),
 	})),
 	{
-		include: [{ model: User.unscoped(), as: "user" }, Client.EntrepriseDetail],
+		include: [{ model: User.unscoped(), as: "user" }, Client.EntrepriseDetail, Client.Employee],
 	},
 )
 	.then(() => {

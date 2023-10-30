@@ -14,8 +14,7 @@ export const RequireRoles = (roles) => {
 	 */
 	return async (req, res, next) => {
 
-		if (roles.includes(req.user.role.toLowerCase())) return res.status(403).json("Forbidden");
+		if (!roles.includes(req.user.role.toLowerCase())) return res.status(403).json("Forbidden");
 		next();
 	};
 };
-RequireRoles(["admin", "chef", "technicien", "client"])

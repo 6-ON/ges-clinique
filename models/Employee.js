@@ -8,13 +8,10 @@ export const Employee = sequelize.define("Employee", {
 		allowNull: false,
 		autoIncrement: true,
 	},
-	FirstName: {
+	name: {
 		type: DataTypes.STRING,
 	},
-	LastName: {
-		type: DataTypes.STRING,
-	},
-	Email: {
+	email: {
 		type: DataTypes.STRING,
 	},
 });
