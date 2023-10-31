@@ -1,0 +1,25 @@
+version: '4'
+
+networks:
+  myNet:
+
+services:
+  node-app:
+    container_name: myApp
+    build: .
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - mysql
+    networks:
+      - myNet
+  mysql:
+    container_name: myDB
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinique
+    networks:
+      - myNet
